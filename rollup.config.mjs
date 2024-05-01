@@ -49,17 +49,17 @@ const config = [
         configFile: BABEL_CONFIG_PATH,
       }),
       commonjs(),
-      packagejson({
-        baseContents: (pkgjson) => ({
-          name: pkgjson.name,
-          version: pkgjson.version,
-          author: pkgjson.author,
-          license: pkgjson.license,
-          main: `index.${EXTENTION_CJS}`,
-          module: `index.${EXTENTION_ESM}`,
-          types: 'index.d.ts',
-        }),
-      }),
+      // packagejson({
+      //   baseContents: (pkgjson) => ({
+      //     name: pkgjson.name,
+      //     version: pkgjson.version,
+      //     author: pkgjson.author,
+      //     license: pkgjson.license,
+      //     main: `index.${EXTENTION_CJS}`,
+      //     module: `index.${EXTENTION_ESM}`,
+      //     types: 'index.d.ts',
+      //   }),
+      // }),
     ],
   },
   // esmのビルド

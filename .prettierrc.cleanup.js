@@ -3,6 +3,6 @@ const normal = require('./.prettierrc');
 /** @type {import("prettier").Config} */
 const config = {
   ...normal,
-  organizeImportsSkipDestructiveCodeActions: true,
+  organizeImportsSkipDestructiveCodeActions: false,
 };
 module.exports = config;
