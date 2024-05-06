@@ -12,7 +12,7 @@
   ],
   "engines": {
     "npm": "use yarn instead",
-    "yarn": "4.1.0"
+    "yarn": "^4.0.0"
   },
   "scripts": {
     "build": "rimraf build && rollup --config",
@@ -40,7 +40,6 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.21.4",
     "@babel/runtime": "^7.17.9",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/fs-extra": "^11.0.1",
     "@types/jest": "^29.5.0",
     "@types/lodash-es": "^4.17.6",
@@ -58,5 +57,5 @@
     "tslib": "^2.5.0",
     "typescript": "^5.0.0"
   },
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.2.1"
 }
