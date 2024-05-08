@@ -160,7 +160,7 @@ function createExportFiles(targetDirPath: string, options: GenerateIndexesOpts) 
  */
 function exportIndex(targetDirPath: string, exportFiles: ExportFiles, options: GenerateIndexesOpts) {
   const { defaultExport, sources, resources, dirs, hasTypes, hasConstants, hasDefaultExport } = exportFiles,
-    { indexFileName = 'index.ts', trial } = options,
+    { indexFileName = 'index.ts', dryRun } = options,
     index: string[] = [];
 
   // 出力先のディレクトリのデフォルトエクスポート
@@ -207,7 +207,7 @@ function exportIndex(targetDirPath: string, exportFiles: ExportFiles, options: G
   // indexの出力
   const indexFilePath = path.join(targetDirPath, indexFileName),
     indexContents = index.join(os.EOL);
-  if (!trial) {
+  if (!dryRun) {
     // ファイルに出力
     fs.writeFileSync(indexFilePath, indexContents);
     console.info(indexFilePath);
