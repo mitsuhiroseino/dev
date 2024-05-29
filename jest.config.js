@@ -10,7 +10,7 @@ module.exports = {
   },
   transform: {
     // node_modules配下のemsをcjsに変換するために追加
-    '^.+\\.m?jsx?$': ['babel-jest', { configFile: './babel.config.test.js' }],
+    '^.+\\.m?jsx?$': ['babel-jest', { configFile: './babel.test.config.js' }],
     // 当プロジェクトのtsをjsに変換するために追加
     '^.+\\.tsx?$': [
       'ts-jest',

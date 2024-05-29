@@ -1,4 +1,4 @@
-const normal = require('./.prettierrc');
+const normal = require('./prettier.config');
 
 /** @type {import("prettier").Config} */
 const config = {
