@@ -5,7 +5,6 @@
     "lib": ["ESNext"],
     "rootDir": "./src",
     "outDir": "./build",
-    "baseUrl": "./",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -24,5 +23,6 @@
     "types": ["jest", "node"],
     "strictPropertyInitialization": false
   },
-  "include": ["./src"]
+  "include": ["./src"],
+  "exclude": ["./src/__test__"]
 }

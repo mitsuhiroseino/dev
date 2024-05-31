@@ -30,12 +30,12 @@ type GenerateIndexesOpts = GenerateIndexesOptions & {
   /**
    * 処理対象とする拡張子
    */
-  targetExtsMap: { [ext: string]: true };
+  targetExtsMap: Record<string, true>;
 
   /**
    * 処理対象から除外するディレクトリの名称
    */
-  excludeDirNameMap: { [dir: string]: true };
+  excludeDirNameMap: Record<string, true>;
 };
 
 /**
@@ -48,11 +48,11 @@ export default function generateIndex(targetDirPath: string, options: GenerateIn
   const { targetExts = ['.ts', '.tsx', '.js', '.jsx'], excludeDirNames = [], ...rest } = options,
     opts: GenerateIndexesOpts = {
       ...rest,
-      targetExtsMap: targetExts.reduce((result, ext) => {
+      targetExtsMap: targetExts.reduce((result: Record<string, true>, ext) => {
         result[ext] = true;
         return result;
       }, {}),
-      excludeDirNameMap: excludeDirNames.reduce((result, dir) => {
+      excludeDirNameMap: excludeDirNames.reduce((result: Record<string, true>, dir) => {
         result[dir] = true;
         return result;
       }, {}),

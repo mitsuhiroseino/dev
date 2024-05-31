@@ -26,7 +26,7 @@ function installFromLocal(localNodeModulesPath: string, options: InstallFromLoca
   const packageJson = fs.readJSONSync(resolvedPackageJsonPath),
     localPackages = reduce(
       { ...packageJson.dependencies, ...packageJson.devDependencies },
-      (result, value, key) => {
+      (result: Record<string, string>, value, key) => {
         if (value.startsWith(localNodeModulesPath)) {
           result[key] = value;
         }
