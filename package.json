@@ -1,6 +1,6 @@
 {
   "name": "@visue/dev",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "Mitsuhiro Seino",
   "license": "MIT",
   "main": "build/index.js",

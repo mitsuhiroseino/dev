@@ -8,6 +8,16 @@ module.exports = {
     '^src/(.*)$': '<rootDir>/src/$1',
   },
   transform: {
+    // node_modules配下のemsをcjsに変換するために追加
+    '^.+\\.m?jsx?$': [
+      'babel-jest',
+      {
+        // ビルド用の設定を継承
+        extends: './babel.config.js',
+        // esmをcjsに変換する
+        plugins: ['@babel/plugin-transform-modules-commonjs'],
+      },
+    ],
     // 当プロジェクトのtsをjsに変換するために追加
     '^.+\\.tsx?$': [
       'ts-jest',
@@ -17,4 +27,7 @@ module.exports = {
       },
     ],
   },
+  // node_modules配下はesmからcjsへの変換を行わない
+  // 但しnanoidはcjsのソースが提供されていないため変換する
+  transformIgnorePatterns: ['node_modules/(?!(nanoid))/'],
 };

@@ -20,5 +20,3 @@
 local/
 
 *.code-workspace
-packages/node-core/src/__test__/_resources_/util/iteration/getFsGenerator.test/dir1a/dir1b-2a_sl
-packages/node-core/src/__test__/_resources_/util/iteration/getFsGenerator.test/dir1a/dir1b-2b_jc/

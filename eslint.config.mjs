@@ -14,14 +14,23 @@ export default [
     languageOptions: {
       // node,jestのグローバル変数を有効
       globals: [globals.node, globals.jest],
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: process.cwd(),
+      },
     },
   },
-  // TypeScript用の設定
-  ...tsPlugin.configs.recommended,
   // JavaScript用の設定
   jsPlugin.configs.recommended,
+  // TypeScript用の設定
+  ...tsPlugin.configs.recommended,
   // prettierと競合するlintを無効にする
   prettierPlugin,
   // コンフィグファイルはlintから除外
   { ignores: ['*.config.{js,mjs,ts}'] },
+  {
+    rules: {
+      noExplicitAny: false,
+    },
+  },
 ];

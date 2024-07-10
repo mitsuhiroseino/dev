@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import * as path from 'path';
+import packagejson from 'rollup-plugin-generate-package-json';
 
 const INPUT = './src/index.ts',
   EXTENTIONS = ['.ts', '.js'],
@@ -11,8 +12,10 @@ const INPUT = './src/index.ts',
   // node_modules配下のdependenciesはバンドルしない。下記の正規表現の指定をするためには'@rollup/plugin-node-resolve'が必要
   EXTERNAL = [/node_modules/],
   OUTPUT = './build',
+  OUTPUT_CJS = OUTPUT,
+  OUTPUT_ESM = OUTPUT,
   BABEL_CONFIG_PATH = path.resolve('babel.config.js'),
-  TEST_FILE = /.+__test__.+/;
+  TSCONFIG_PATH = path.resolve('tsconfig.json');
 
 // commonjs用とesmodule用のソースを出力する
 const config = [
@@ -22,7 +25,7 @@ const config = [
     input: INPUT,
     output: {
       // 出力先ディレクトリ
-      dir: OUTPUT,
+      dir: OUTPUT_CJS,
       format: 'cjs',
       exports: 'named',
       sourcemap: true,
@@ -35,10 +38,9 @@ const config = [
     plugins: [
       nodeResolve(),
       typescript({
-        tsconfig: './tsconfig.json',
-        exclude: [TEST_FILE],
-        declarationDir: OUTPUT,
-        outDir: OUTPUT,
+        tsconfig: TSCONFIG_PATH,
+        declarationDir: OUTPUT_CJS,
+        outDir: OUTPUT_CJS,
       }),
       babel({
         extensions: EXTENTIONS,
@@ -46,6 +48,17 @@ const config = [
         configFile: BABEL_CONFIG_PATH,
       }),
       commonjs(),
+      packagejson({
+        baseContents: (pkgjson) => ({
+          name: pkgjson.name,
+          version: pkgjson.version,
+          author: pkgjson.author,
+          license: pkgjson.license,
+          main: `index.${EXTENTION_CJS}`,
+          module: `index.${EXTENTION_ESM}`,
+          types: 'index.d.ts',
+        }),
+      }),
     ],
   },
   // esmのビルド
@@ -54,7 +67,7 @@ const config = [
     input: INPUT,
     output: {
       // 出力先ディレクトリ
-      dir: OUTPUT,
+      dir: OUTPUT_ESM,
       format: 'es',
       exports: 'named',
       sourcemap: true,
@@ -67,11 +80,10 @@ const config = [
     plugins: [
       nodeResolve(),
       typescript({
-        tsconfig: './tsconfig.json',
+        tsconfig: TSCONFIG_PATH,
         declaration: false,
         declarationMap: false,
-        exclude: [TEST_FILE],
-        outDir: OUTPUT,
+        outDir: OUTPUT_ESM,
       }),
       babel({
         extensions: EXTENTIONS,
